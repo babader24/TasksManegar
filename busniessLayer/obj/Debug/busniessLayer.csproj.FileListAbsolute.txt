@@ -1,0 +1,9 @@
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\bin\Debug\busniessLayer.dll
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\bin\Debug\busniessLayer.pdb
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\bin\Debug\DataAccessLayer.dll
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\bin\Debug\DataAccessLayer.pdb
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\obj\Debug\busniessLayer.csproj.AssemblyReference.cache
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\obj\Debug\busniessLayer.csproj.CoreCompileInputs.cache
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\obj\Debug\busniess.0DFC2CA8.Up2Date
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\obj\Debug\busniessLayer.dll
+F:\My_github_apps\TaskManegment\TaskManegar\busniessLayer\obj\Debug\busniessLayer.pdb
