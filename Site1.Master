@@ -12,43 +12,71 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
+    <style>
+        /* Make the entire page take at least 100% of the height */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        /* Use flexbox layout */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full page height */
+        }
+
+        .content {
+            flex-grow: 1; /* Allow content to take all available space */
+            padding-bottom: 100px; /* Ensure space for footer */
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #0a4275;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+
 </head>
-<body>
+<body >
     <form id="form1" runat="server">
 
         <!-- Navbar -->
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <img src="imgs/TaskLogo.png" alt="logo" width="40">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">Torund</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="#">Home</a>
-                        <a class="nav-item nav-link" href="#">Features</a>
-                        <a class="nav-item nav-link" href="#">Pricing</a>
-                        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <a class="nav-item nav-link" href="#">About</a>
+                        <a class="nav-item nav-link" href="#">Sgin up</a>
+                        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>
                     </div>
                 </div>
             </nav>
         </div>
-
         <!-- Content -->
+
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
 
-        <!-- Modal Script -->
-        <script type="text/javascript">
-            function showModal(message) {
-                document.getElementById('modalMessage').innerText = message;
-                $('#exampleModal').modal('show');
-            }
-        </script>
-        <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 Task Manager. All rights reserved.</p>
+    </footer>
+
+        
+        <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     </form>
 </body>
 </html>

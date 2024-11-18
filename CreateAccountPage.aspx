@@ -102,7 +102,7 @@
                             </span>
                         </div>
                         <asp:FileUpload ID="filePhoto" runat="server" CssClass="form-control bg-white border-left-0 border-md" />
-                    </div>
+                    </div>                                 
 
                     <!-- Password -->
                     <div class="input-group col-lg-6 mb-4">
@@ -165,7 +165,21 @@
         }
 
         return true; // السماح بإرسال النموذج إذا كانت جميع الحقول مكتملة
+        }
+
+
+       
+    function previewImage(event) {
+        const file = event.target.files[0];
+            if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('previewImage').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
     }
+
     </script>
 
 
