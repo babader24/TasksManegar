@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\createaccountpage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:createaccountpage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|f:\\my_github_apps\\taskmanegment\\thetasksmanegar\\webform2.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:webform2.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|f:\\my_github_apps\\taskmanegment\\thetasksmanegar\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|f:\\my_github_apps\\taskmanegment\\thetasksmanegar\\loginpage.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:loginpage.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\loginpage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:loginpage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|f:\\my_github_apps\\taskmanegment\\thetasksmanegar\\taskspage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:taskspage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|f:\\my_github_apps\\taskmanegment\\thetasksmanegar\\createaccountpage.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:createaccountpage.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\site1.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
-      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:site1.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+      "AbsoluteMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\createaccountpage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{8171E6AC-014A-46E0-8D6D-DDB1ED54A04D}|TasksManegar.csproj|solutionrelative:createaccountpage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,59 +34,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Home.aspx",
-              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\Home.aspx",
-              "RelativeDocumentMoniker": "Home.aspx",
-              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\Home.aspx",
-              "RelativeToolTip": "Home.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-18T17:22:42.428Z",
+              "DocumentIndex": 0,
+              "Title": "LoginPage.aspx.cs",
+              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\LoginPage.aspx.cs",
+              "RelativeDocumentMoniker": "LoginPage.aspx.cs",
+              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\LoginPage.aspx.cs",
+              "RelativeToolTip": "LoginPage.aspx.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAuwBMAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T17:33:22.824Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "WebForm2.aspx",
-              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\WebForm2.aspx",
-              "RelativeDocumentMoniker": "WebForm2.aspx",
-              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\WebForm2.aspx",
-              "RelativeToolTip": "WebForm2.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-18T16:23:42.344Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TasksPage.aspx",
-              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\TasksPage.aspx",
-              "RelativeDocumentMoniker": "TasksPage.aspx",
-              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\TasksPage.aspx",
-              "RelativeToolTip": "TasksPage.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-18T09:52:58.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CreateAccountPage.aspx",
-              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\CreateAccountPage.aspx",
-              "RelativeDocumentMoniker": "CreateAccountPage.aspx",
-              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\CreateAccountPage.aspx",
-              "RelativeToolTip": "CreateAccountPage.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-17T06:21:29.394Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "LoginPage.aspx",
               "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\LoginPage.aspx",
               "RelativeDocumentMoniker": "LoginPage.aspx",
@@ -111,28 +60,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "WebForm1.aspx",
-              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\WebForm1.aspx",
-              "RelativeDocumentMoniker": "WebForm1.aspx",
-              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\WebForm1.aspx",
-              "RelativeToolTip": "WebForm1.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-16T10:08:21.818Z",
+              "DocumentIndex": 2,
+              "Title": "CreateAccountPage.aspx.cs",
+              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\CreateAccountPage.aspx.cs",
+              "RelativeDocumentMoniker": "CreateAccountPage.aspx.cs",
+              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\CreateAccountPage.aspx.cs",
+              "RelativeToolTip": "CreateAccountPage.aspx.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T16:18:00.907Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Site1.Master",
-              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\Site1.Master",
-              "RelativeDocumentMoniker": "Site1.Master",
-              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\Site1.Master",
-              "RelativeToolTip": "Site1.Master",
+              "DocumentIndex": 3,
+              "Title": "CreateAccountPage.aspx",
+              "DocumentMoniker": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\CreateAccountPage.aspx",
+              "RelativeDocumentMoniker": "CreateAccountPage.aspx",
+              "ToolTip": "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\CreateAccountPage.aspx",
+              "RelativeToolTip": "CreateAccountPage.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-16T10:06:05.083Z",
+              "WhenOpened": "2024-11-17T06:21:29.394Z",
               "EditorCaption": ""
             }
           ]

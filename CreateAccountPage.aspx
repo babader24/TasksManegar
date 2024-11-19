@@ -89,8 +89,8 @@
                         </div>
                         <asp:DropDownList ID="ddlGender" runat="server" CssClass="form-control custom-select bg-white border-left-0 border-md">
                             <asp:ListItem Text="Select Gender" Value="" />
-                            <asp:ListItem Text="Male" Value="male" />
-                            <asp:ListItem Text="Female" Value="female" />
+                            <asp:ListItem Text="Male" Value="1" />
+                            <asp:ListItem Text="Female" Value="0" />
                         </asp:DropDownList>
                     </div>
 

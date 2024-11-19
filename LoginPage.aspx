@@ -85,17 +85,13 @@
     </div>
 </div>
 
-
-
 <!-- Script for Toggle Password Visibility -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Add toggle password visibility functionality
         const togglePassword = document.querySelector('.toggle-password');
         const passwordField = document.getElementById('<%= txtPassword.ClientID %>');
 
         togglePassword.addEventListener('click', function () {
-            // Toggle password field type
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
                 togglePassword.classList.remove('fa-eye');
@@ -108,26 +104,20 @@
         });
     });
 
-
     function validateLoginForm() {
         var username = document.getElementById('<%= txtUsername.ClientID %>').value;
-            var password = document.getElementById('<%= txtPassword.ClientID %>').value;
+        var password = document.getElementById('<%= txtPassword.ClientID %>').value;
 
-            if (username == "") {
-                alert('يرجى إدخال اسم المستخدم.');
-                return false; // منع إرسال النموذج
-            }
-            if (password == "") {
-                alert('يرجى إدخال كلمة المرور.');
-
-                return false; // منع إرسال النموذج
-            }
-
-            return true; // السماح بإرسال النموذج
-    } 
-    
-
+        if (username == "") {
+            alert('Please enter a username.');
+            return false; // Prevent form submission
+        }
+        if (password == "") {
+            alert('Please enter a password.');
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
 </script>
-
 
 </asp:Content>

@@ -4,3 +4,9 @@ F:\My_github_apps\TaskManegment\TaskManegar\DataAccessLayer\obj\Debug\DataAccess
 F:\My_github_apps\TaskManegment\TaskManegar\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
 F:\My_github_apps\TaskManegment\TaskManegar\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 F:\My_github_apps\TaskManegment\TaskManegar\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+F:\My_github_apps\TaskManegment\TheTasksManegar\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+F:\My_github_apps\TaskManegment\TheTasksManegar\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+F:\My_github_apps\TaskManegment\TheTasksManegar\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+F:\My_github_apps\TaskManegment\TheTasksManegar\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+F:\My_github_apps\TaskManegment\TheTasksManegar\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+F:\My_github_apps\TaskManegment\TheTasksManegar\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
