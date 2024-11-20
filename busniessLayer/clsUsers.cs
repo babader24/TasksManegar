@@ -87,6 +87,23 @@ namespace busniessLayer
                 return null;
         }
 
+        public static clsUsers FindByUserName(string UserName)
+        {
+            string FirstName = "", LastName = "", Email = "", ImagePath = "", Password = "";
+            int UserID = -1;
+            DateTime dateOfBirth = DateTime.Now;
+            byte Gender = 0;
+
+            if (clsUsersDataAccess.FindByUserName(ref UserID, ref FirstName, ref LastName, ref dateOfBirth, ref Email, ref Gender,
+                ref ImagePath, UserName, ref Password))
+            {
+                return new clsUsers(UserID, FirstName, LastName, dateOfBirth, Email, Gender, ImagePath, Password, UserName);
+
+            }
+            else
+                return null;
+        }
+
         public static bool Delete(int UserID)
         {
             return clsUsersDataAccess.DeleteUser(UserID);

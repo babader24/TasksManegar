@@ -59,8 +59,10 @@ namespace DataAccessLayer
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
-
-                IsFound = reader.HasRows;
+                if (reader.Read())
+                    IsFound = true;
+                else
+                    IsFound = false;
 
                 reader.Close();
             }
@@ -113,7 +115,7 @@ namespace DataAccessLayer
             int UserID = -1;
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
 
-            string query = @"insert into Users (FirstName, LastName, DateOfBirth,Email,Gender,ImagePath,Password,UserName)
+            string query = @"insert into Users (FirstName, LastName, DateOfBirth,Email,Gender,ImagePath,UserName,Password)
                 values(@FirstName,@LastName,@DateOfBirth,@Email,@Gender,
                 @ImagePath,@UserName,@Password);
                 Select Scope_identity();";
@@ -247,6 +249,56 @@ namespace DataAccessLayer
                     Email = (string)reader["Email"];
                     Gender = (byte)reader["Gender"];                    
                     UserName = (string)reader["UserName"];
+                    Password = (string)reader["Password"];
+
+                    if (reader["ImagePath"] != DBNull.Value)
+                        ImagePath = (string)reader["ImagePath"];
+                    else
+                        ImagePath = "";
+                }
+                else
+                    IsFound = false;
+                reader.Close();
+
+            }
+            catch
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return IsFound;
+        }
+
+        public static bool FindByUserName(ref int UserID, ref string FirstName, ref string LastName, ref DateTime DateOfBirth, ref string Email, ref byte Gender,
+           ref string ImagePath,  string UserName, ref string Password)
+        {
+            bool IsFound;
+
+            SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
+            string query = "select * from Users WHere UserName = @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@UserID", UserName);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+
+                    UserID = (int)reader["UserID"];
+                    FirstName = (string)reader["FirstName"];
+                    LastName = (string)reader["LastName"];
+                    DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    Email = (string)reader["Email"];
+                    Gender = (byte)reader["Gender"];                    
                     Password = (string)reader["Password"];
 
                     if (reader["ImagePath"] != DBNull.Value)

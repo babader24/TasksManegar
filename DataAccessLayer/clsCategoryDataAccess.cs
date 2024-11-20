@@ -15,7 +15,7 @@ namespace DataAccessLayer
             DataTable dt = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
-            string query = "select * from Category Where UserID = @UserID ";
+            string query = "select CategoryID, CategoryName from Category Where UserID = @UserID ";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@UserID", UserID);
@@ -103,6 +103,45 @@ namespace DataAccessLayer
                 connection.Close();
             }
             return (roweffected > 0);
+        }
+
+        public static int GetCategoryIdByName(string categoryName)
+        {
+            int CategoryID;
+
+            SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
+            string query = "select CategoryID from Category where CategoryName = @CategoryName";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@CategoryName", categoryName);
+            
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (!reader.IsDBNull(0))
+                {
+                    CategoryID = reader.GetInt32(0);
+                }
+                else
+                    return -1;
+
+                reader.Close();
+                
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return CategoryID;
         }
 
     }

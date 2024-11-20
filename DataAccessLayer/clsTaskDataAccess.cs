@@ -11,12 +11,15 @@ namespace DataAccessLayer
 {
     public class clsTaskDataAccess
     {
+        //select TaskID, Title, Description, CategoryName, StartDate, EndDate, IsActive ,Task.UserID from Task inner join Category 
+        //on Task.CategoryID = Category.CategoryID Where UserID = @UserID
         public static DataTable GetAllTasks(int UserID)
         {
             DataTable dt = new DataTable(); 
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
-            string query = "select * from Task Where UserID = @UserID";
+            string query = @"select TaskID, Title, Description, CategoryName, StartDate, EndDate, IsActive ,Task.UserID from Task inner join Category 
+            on Task.CategoryID = Category.CategoryID Where Task.UserID = @UserID";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@UserID", UserID);

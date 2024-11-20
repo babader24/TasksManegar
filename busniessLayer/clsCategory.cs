@@ -53,5 +53,10 @@ namespace busniessLayer
             return CategoryID != -1;
         }
 
+        public static int GetCategoryID(string categoryName)
+        {
+            return clsCategoryDataAccess.GetCategoryIdByName(categoryName);
+        }
+
     }
 }

@@ -156,7 +156,7 @@
 
       .team-member h4 {
           font-size: 1.5rem;
-          color: #343a40;
+          color: white;
           margin-top: 10px;
       }
 
@@ -166,7 +166,7 @@
       }
 
       .team-section {
-          background-color: #0a4275;
+          background-color: #343a40;
           color: white;
           padding: 60px 0;
       }
@@ -215,22 +215,22 @@
      <h2 class="text-center mb-4">Key Features</h2>
      <div class="row text-center">
          <div class="col-md-4 mb-4">
-             <div class="feature-card">
-                 <img src="https://via.placeholder.com/350x250?text=Task+Management" alt="Task Management" class="feature-image">
+             <div class="feature-card">                 
+                 <img src="imgs/12150869_4930161.jpg" alt="Task Management" class="feature-image">
                  <h4 class="feature-title">Task Management</h4>
                  <p class="feature-description">Efficiently add, update, and delete tasks. Keep track of your daily progress.</p>
              </div>
          </div>
          <div class="col-md-4 mb-4">
-             <div class="feature-card">
-                 <img src="https://via.placeholder.com/350x250?text=Deadline+Tracking" alt="Deadline Tracking" class="feature-image">
+             <div class="feature-card">                 
+                 <img src="imgs/1113467_293.jpg" alt="Deadline Tracking" class="feature-image">
                  <h4 class="feature-title">Deadline Tracking</h4>
                  <p class="feature-description">Set deadlines for your tasks to stay on track and meet important goals.</p>
              </div>
          </div>
          <div class="col-md-4 mb-4">
-             <div class="feature-card">
-                 <img src="https://via.placeholder.com/350x250?text=User+Management" alt="User Management" class="feature-image">
+             <div class="feature-card">                 
+                 <img src="imgs/4274116_2230172.jpg" alt="User Management" class="feature-image">
                  <h4 class="feature-title">User Management</h4>
                  <p class="feature-description">Manage users, assign tasks, and keep your team organized with ease.</p>
              </div>
@@ -238,22 +238,22 @@
      </div>
      <div class="row text-center">
          <div class="col-md-4 mb-4">
-             <div class="feature-card">
-                 <img src="https://via.placeholder.com/350x250?text=Task+Editing" alt="Task Editing" class="feature-image">
+             <div class="feature-card">                 
+                 <img src="imgs/3199626_466063-PG0OYO-147.jpg" alt="Task Editing" class="feature-image">
                  <h4 class="feature-title">Edit & Update Tasks</h4>
                  <p class="feature-description">Edit any task on the go, and keep your task list up-to-date in real-time.</p>
              </div>
          </div>
          <div class="col-md-4 mb-4">
-             <div class="feature-card">
-                 <img src="https://via.placeholder.com/350x250?text=Task+Archiving" alt="Task Archiving" class="feature-image">
+             <div class="feature-card">                 
+                 <img src="imgs/5566766_2892186.jpg" alt="Task Archiving" class="feature-image">
                  <h4 class="feature-title">Task Archiving</h4>
                  <p class="feature-description">Archive completed tasks to keep your dashboard clean and focused.</p>
              </div>
          </div>
          <div class="col-md-4 mb-4">
-             <div class="feature-card">
-                 <img src="https://via.placeholder.com/350x250?text=Notifications" alt="Notifications" class="feature-image">
+             <div class="feature-card">                 
+                 <img src="imgs/2400977_308606-P8GH4L-799.jpg" alt="Notifications" class="feature-image">
                  <h4 class="feature-title">Notifications</h4>
                  <p class="feature-description">Get notified of upcoming deadlines, task updates, and new assignments.</p>
              </div>
@@ -262,7 +262,7 @@
  </section>
 
   <!-- About Project and Team Section -->
- <section class="about-section text-center">
+ <section id="About" class="about-section text-center">
      <h2>About the Project</h2>
      <p>The Task Manager application is designed to help individuals and teams efficiently manage and organize their tasks. It provides a user-friendly interface with powerful features such as task creation, deadline tracking, and user management. Our mission is to make task management easier and more efficient for everyone.</p>
  </section>
@@ -273,18 +273,38 @@
      <div class="container">
          <div class="row">
              <div class="col-md-4 team-member">
-                 <img src="https://via.placeholder.com/120" alt="Team Member 1">
+                 <img src="imgs/man400px.png" alt="Team Member 1">
                  <h4>Ahmed Babader</h4>
                  <p>Lead Developer</p>
              </div>
              <div class="col-md-4 team-member">
-                 <img src="https://via.placeholder.com/120" alt="Team Member 2">
-                 <h4>John Doe</h4>
+                 <img src="imgs/man400px.png" alt="Team Member 2">
+                 <h4>Akram AbdelSamad</h4>
                  <p>Front-end Developer</p>
              </div>
              <div class="col-md-4 team-member">
-                 <img src="https://via.placeholder.com/120" alt="Team Member 3">
-                 <h4>Jane Smith</h4>
+                 <img src="imgs/man400px.png" alt="Team Member 3">
+                 <h4>Emad Abdullah</h4>
+                 <p>UI/UX Designer</p>
+             </div>
+                          <div class="col-md-4 team-member">
+                 <img src="imgs/man400px.png" alt="Team Member 1">
+                 <h4>Ammar Yasser</h4>
+                 <p>Front-end Developer</p>
+             </div>
+             <div class="col-md-4 team-member">
+                 <img src="imgs/man400px.png" alt="Team Member 3">
+                 <h4>Yahya Hussain</h4>
+                 <p>UI/UX Designer</p>
+             </div>
+             <div class="col-md-4 team-member">
+                 <img src="imgs/man400px.png" alt="Team Member 2">
+                 <h4>Mohammed Eafaq</h4>
+                 <p>Back-end Developer</p>
+             </div>
+             <div class="col-md-4 team-member">
+                 <img src="imgs/man400px.png" alt="Team Member 3">
+                 <h4>Abdulrahman Kudash</h4>
                  <p>UI/UX Designer</p>
              </div>
          </div>

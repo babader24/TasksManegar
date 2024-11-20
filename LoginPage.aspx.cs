@@ -11,12 +11,19 @@ namespace TasksManegar
     {
         private string remeberMeFile = "F:\\My_github_apps\\TaskManegment\\TheTasksManegar\\rememberMe.txt";
 
+        public static class Globle
+        {
+            public static clsUsers _GUser {  get; set; }
+        }
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 // هذا الكود سيعمل فقط عند تحميل الصفحة لأول مرة
                 loadUserInfo();
+                
             }
         }
 
@@ -25,8 +32,10 @@ namespace TasksManegar
             // Replace with your login validation logic (hash the password before checking)
             if (clsUsers.loginCheck(txtUsername.Text,txtPassword.Text))
             {
+                Globle._GUser = clsUsers.FindByUserName(txtUsername.Text);
+
                 ClientScript.RegisterStartupScript(this.GetType(), "WelcomeMessage",
-                    "alert('Welcome " + txtUsername.Text + "!');window.location.href = 'Home.aspx';", true);
+                    "alert('Welcome " + txtUsername.Text + "!');window.location.href = 'Dashbord.aspx';", true);
             }
             else
             {

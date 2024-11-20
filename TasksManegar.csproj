@@ -2178,8 +2178,15 @@
     <Content Include="fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome\svgs\solid\z.svg" />
     <Content Include="Home.aspx" />
+    <Content Include="imgs\1113467_293.jpg" />
+    <Content Include="imgs\12150869_4930161.jpg" />
+    <Content Include="imgs\2400977_308606-P8GH4L-799.jpg" />
+    <Content Include="imgs\3199626_466063-PG0OYO-147.jpg" />
+    <Content Include="imgs\4274116_2230172.jpg" />
+    <Content Include="imgs\5566766_2892186.jpg" />
     <Content Include="imgs\createAccount.png" />
     <Content Include="imgs\login.png" />
+    <Content Include="imgs\man400px.png" />
     <Content Include="imgs\TaskLogo.png" />
     <Content Include="imgs\toplogo.png" />
     <Content Include="LoginPage.aspx" />
