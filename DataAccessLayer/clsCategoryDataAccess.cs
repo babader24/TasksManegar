@@ -10,15 +10,15 @@ namespace DataAccessLayer
 {
     public class clsCategoryDataAccess
     {
-        public static DataTable GetAllCategory(int UserID)
+        public static DataTable GetAllCategory()
         {
             DataTable dt = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
-            string query = "select CategoryID, CategoryName from Category Where UserID = @UserID ";
+            string query = "select CategoryID, CategoryName from Category ";
 
             SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@UserID", UserID);
+            
 
             try
             {

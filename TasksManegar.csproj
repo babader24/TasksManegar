@@ -83,6 +83,7 @@
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\css\bootstrap.rtl.css" />
     <Content Include="bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="bootstrap\jquery-3.6.0.min.js" />
     <Content Include="bootstrap\js\bootstrap.bundle.js" />
     <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="bootstrap\js\bootstrap.esm.js" />
@@ -2190,6 +2191,8 @@
     <Content Include="imgs\TaskLogo.png" />
     <Content Include="imgs\toplogo.png" />
     <Content Include="LoginPage.aspx" />
+    <Content Include="materialize\materialize.min.css" />
+    <Content Include="materialize\materialize.min.js" />
     <Content Include="TasksPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />

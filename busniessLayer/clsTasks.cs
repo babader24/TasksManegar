@@ -43,6 +43,24 @@ namespace busniessLayer
             _Mode = enMode.AddMode;
         }
 
+        public static clsTasks Find(int TaskID)
+        {
+            //( TaskID,Title, Description, CategoryID, StartDate, EndDate, IsActive ,UserID)
+            int CategoryID = -1, UserID = -1;
+            string Title = "", Description = "", Email = "", ImagePath = "", Password = "", UserName = "";
+            DateTime StartDate = DateTime.Now, EndDate = DateTime.Now;
+            bool IsActive = false;
+
+            if (clsTaskDataAccess.FindByTaskID(TaskID, ref Title, ref Description, ref CategoryID, ref StartDate, ref EndDate,
+                ref IsActive, ref UserID))
+            {
+                return new clsTasks(TaskID,  Title,  Description,  CategoryID,  StartDate,  EndDate, IsActive, UserID);
+
+            }
+            else
+                return null;
+        }
+
         public clsTasks(int taskID, string title, string description, int categoryID, DateTime startDate, DateTime endDate, bool isActive, int userID)
         {
             TaskID = taskID;

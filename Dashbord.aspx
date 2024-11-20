@@ -13,6 +13,8 @@
     <!-- the fontawesome css file -->
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
+    <%--<link href="materialize/materialize.min.css" rel="stylesheet" />--%>
+
     
     <style>
     /* التعديلات الأساسية */
@@ -112,6 +114,58 @@
     .table-wrapper {
         overflow-x: auto;
     }
+   
+    .btn-edit-green {
+        background-color: #4CAF50;
+        color: white;
+        border: 2px solid #4CAF50;
+        padding: 4px 8px;
+        border-radius: 8px; 
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease; 
+    }
+
+    .btn-edit-green:hover {
+        background-color: #45a049; 
+        border-color: #45a049; 
+        transform: translateY(-2px); 
+    }
+
+    .btn-edit-green:active {
+        transform: translateY(0); 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    }
+
+
+    .btn-edit-red {
+            background-color: white;
+            color: white !important;
+            border: 2px solid #f44336;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+    }
+
+    .btn-edit-red:hover {
+        background-color: #e53935; 
+        transform: translateY(-2px); 
+    }
+
+    .btn-edit-red:active {
+        transform: translateY(0); 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    }
+
+   
+    .btn-edit-red:before {
+        content: "❌"; 
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+    }
 
     .custom-table {
         width: 100%;
@@ -152,6 +206,8 @@
         color: #fff;
     }
 
+
+
     .btn-delete {
         background-color: #dc3545;
         color: #fff;
@@ -191,55 +247,55 @@
             font-size: 14px;
         }
 
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1050; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.5); 
-}
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1050; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
 
-.modal-dialog {
-    position: relative;
-    margin: 10% auto; 
-    width: 90%; 
-    max-width: 600px;
-}
+        .modal-dialog {
+            position: relative;
+            margin: 10% auto; 
+            width: 90%; 
+            max-width: 600px;
+        }
 
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-}
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
 
-.modal-header {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-
-.modal-body {
-    padding: 15px 0;
-}
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
 
 
-.modal-footer {
-    border-top: 1px solid #ddd;
-    padding: 10px 0;
-    text-align: right;
-}
+        .modal-body {
+            padding: 15px 0;
+        }
 
-.modal-close {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
+
+        .modal-footer {
+            border-top: 1px solid #ddd;
+            padding: 10px 0;
+            text-align: right;
+        }
+
+        .modal-close {
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
     }
 </style>
@@ -264,20 +320,26 @@
         </div>
 
           <!-- Main Content -->
-        <div class="container">
+        <div id="Tasks" class="container">
             <!-- Task Management Section -->
             <div class="header-container">
                 <h1 class="title">Task Management</h1>
-                <button type="button" class="btn-add-task " data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
+                <%--<asp:Button runat="server" ID="btnAddTask" Text="Add Task" CssClass="btnaddtask" OnCommand="AddTask_Command" data-bs-toggle="modal" data-bs-target="#addTaskModal" />--%>
+                <button type="button" class="btn-add-task " data-bs-toggle="modal" data-bs-target="#addTaskModal" >Add Task</button>
             </div>
 
-            <div id="Tasks" class="table-wrapper">
+            <div  class="table-wrapper">
                 <asp:GridView ID="gvTasks" runat="server" AutoGenerateColumns="False" CssClass="custom-table" OnRowCommand="gvTasks_RowCommand">
                     <Columns>
                         <asp:TemplateField HeaderText="Select">
                             <ItemTemplate>
-                                <asp:Button ID="btnSelect" runat="server" Text="✔" CommandName="MarkComplete" CommandArgument='<%# Eval("TaskID") %>' CssClass="btn-edit" />
+                                <asp:Button ID="btnSelect" runat="server" 
+                                            Text='<%# bool.Parse(Eval("IsActive").ToString()) ? "✔" : "❌" %>' 
+                                            CommandName="MarkComplete" 
+                                            CommandArgument='<%# Eval("TaskID") %>' 
+                                            CssClass='<%# bool.Parse(Eval("IsActive").ToString()) ? "btn-edit-green" : "btn-edit-red" %>' />
                             </ItemTemplate>
+
                         </asp:TemplateField>
 
        
@@ -314,6 +376,7 @@
         </div>
 
         <!-- Modal Add Task -->
+
 <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -327,8 +390,8 @@
                 <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control mt-2" placeholder="Description"></asp:TextBox>
                 <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control mt-2">
                     
-                   <%-- <asp:ListItem Text="Select Category" Value="" />
-                    <asp:ListItem Text="Category 1" Value="1" />
+                   <asp:ListItem Text="Select Category" Value="" />
+                    <%-- <asp:ListItem Text="Category 1" Value="1" />
                     <asp:ListItem Text="Category 2" Value="2" />--%>
                 </asp:DropDownList>
                 <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control mt-2" placeholder="Start Date" TextMode="Date"></asp:TextBox>
@@ -345,9 +408,9 @@
 
 
         <!--  achievements -->
-        <div class="container">
+        <div id="Achievements" class="container">
     <h2 class="title">Achievements</h2>
-    <div id="Achievements" class="table-wrapper">
+    <div  class="table-wrapper">
         <asp:GridView ID="gvAchievements" runat="server" AutoGenerateColumns="False" CssClass="custom-table" OnRowCommand="gvAchievements_RowCommand">
             <Columns>
                 <asp:BoundField DataField="NoteId" HeaderText="ID" SortExpression="NoteId" Visible="false" />
@@ -382,7 +445,8 @@
 
             editButtons.forEach((btn) => {
                 btn.addEventListener("click", () => {
-                    alert("Edit functionality is not implemented yet!");
+                    event.preventDefault();
+                    openAddTaskModal();//alert("Edit functionality is not implemented yet!");
                 });
             });
 
@@ -398,12 +462,24 @@
         function closeModal() {
                 $('#addTaskModal').modal('hide');
         }
-
         function openAddTaskModal() {
             $('#addTaskModal').modal('show');
+            event.stopPropagation();  // إيقاف الأحداث الأخرى من التأثير
         }
+
+        //function openAddTaskModal() {
+        //    $('#addTaskModal').modal('show');
+        //}
+
+
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+            $('#addTaskModal').modal('show');
+        });
+
 
     </script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bootstrap/jquery-3.6.0.min.js"></script>
+    <%--<script src="materialize/materialize.min.js"></script>--%>
 </body>
 </html>

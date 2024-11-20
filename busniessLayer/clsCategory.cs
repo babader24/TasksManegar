@@ -36,9 +36,9 @@ namespace busniessLayer
             
         }
 
-        public static DataTable GetAllCategory(int UserID)
+        public static DataTable GetAllCategory()
         {
-            return clsCategoryDataAccess.GetAllCategory(UserID);
+            return clsCategoryDataAccess.GetAllCategory();
         }
 
         public static bool DeleteCategory(int UserID)

@@ -155,6 +155,54 @@ namespace DataAccessLayer
             return (rowEffected > 0);
         }
 
+       
+        public static bool FindByTaskID(int TaskID, ref string Title, ref string Description,ref int CategoryID,
+            ref DateTime StartDate, ref DateTime EndDate, ref bool IsActive,ref int UserID)
+        {
+            bool IsFound;
+
+            SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
+            string query = "select * from Task WHere TaskID = @TaskID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TaskID", TaskID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+                    
+                    Title = (string)reader["Title"];
+                    Description = (string)reader["Description"];
+                    CategoryID = (int)reader["CategoryID"];
+                    StartDate = (DateTime)reader["StartDate"];
+                    EndDate = (DateTime)reader["EndDate"];
+                    IsActive = (bool)reader["IsActive"];
+                    UserID = (int)reader["UserID"];
+
+                    
+                }
+                else
+                    IsFound = false;
+                reader.Close();
+
+            }
+            catch
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return IsFound;
+        }
+
 
     }
 }

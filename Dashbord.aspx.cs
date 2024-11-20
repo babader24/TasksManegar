@@ -11,14 +11,18 @@ namespace TasksManegar
 {
     public partial class Dashbord : System.Web.UI.Page
     {
+        private enum enMode { AddTask=0, UpdateTask=1};
+         enMode _Mode;
+
+        clsTasks TheTask;
+        int TheTaskID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
 
                 Config();
-
-
             }
         }
 
@@ -40,7 +44,7 @@ namespace TasksManegar
         private void LoadCategories()
         {
 
-            ddlCategory.DataSource = clsCategory.GetAllCategory(Globle._GUser.UserID);
+            ddlCategory.DataSource = clsCategory.GetAllCategory();
             ddlCategory.DataTextField = "CategoryName"; 
             ddlCategory.DataValueField = "CategoryID";  
             ddlCategory.DataBind();
@@ -94,16 +98,14 @@ namespace TasksManegar
         {
             if (e.CommandName == "MarkComplete")
             {
+                
+                clsTasks _Task = clsTasks.Find(int.Parse(e.CommandArgument.ToString()));
 
-                clsTasks _Task = new clsTasks();
+                if(_Task.IsActive)
+                    _Task.IsActive = false;
 
-                _Task.Title = txtTitle.Text;
-                _Task.Description = txtDescription.Text;
-                _Task.CategoryID = int.Parse(ddlCategory.SelectedValue);
-                _Task.StartDate = DateTime.Parse(txtStartDate.Text);
-                _Task.EndDate = DateTime.Parse(txtEndDate.Text);
-                _Task.IsActive = true;
-                _Task.UserID = Globle._GUser.UserID;
+                else
+                    _Task.IsActive = true;
 
                 if (_Task.Save())
                 {
@@ -115,12 +117,12 @@ namespace TasksManegar
                     ClientScript.RegisterStartupScript(this.GetType(), "Error",
                         "alert('Failed')");
 
-
-               
             }
             if (e.CommandName == "EditTask")
             {
-                //ClientScript.RegisterStartupScript(this.GetType(), "openModal", "openAddTaskModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openAddTaskModal();", true);
+
+                TheTaskID = (int)e.CommandArgument;
             }
 
             if (e.CommandName == "DeleteTask")
@@ -129,13 +131,26 @@ namespace TasksManegar
                 clsTasks.DeleteTask(taskId);
             }
 
+
+
             // إعادة تحميل المهام
             LoadTasks();
         }
 
         private void EditTask()
         {
-            
+            _Mode = enMode.UpdateTask;
+            TheTask = clsTasks.Find(TheTaskID);
+
+           txtTitle.Text = TheTask.Title;
+           txtDescription.Text = TheTask.Description;
+           ddlCategory.SelectedIndex = TheTask.CategoryID;
+           txtStartDate.Text = TheTask.StartDate.ToString("dd/MM/yyyy");
+           txtEndDate.Text = TheTask.EndDate.ToString("dd/MM/yyyy");
+           chkIsActive.Checked = TheTask.IsActive;
+
+
+
         }
         private void BindAchievements()
         {
@@ -244,8 +259,17 @@ namespace TasksManegar
         }
 
 
+        protected void AddTask_Command(object sender, CommandEventArgs e)
+        {
+            // هنا يمكنك كتابة الكود الذي ترغب في تنفيذه عند الضغط على الزر
+            // مثال: فتح المودال أو تنفيذ أي عملية أخرى
+            Response.Write("Add Task button clicked");
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
+
+
             clsTasks _Task = new clsTasks();
 
             _Task.Title = txtTitle.Text;
