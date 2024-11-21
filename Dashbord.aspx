@@ -13,7 +13,7 @@
     <!-- the fontawesome css file -->
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
-    <%--<link href="materialize/materialize.min.css" rel="stylesheet" />--%>
+    
 
     
     <style>
@@ -303,9 +303,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
+       
+       
                 <!-- Sidebar -->
         <div class="sidebar">
-            <div class="profile text-center">           <!-- src="imgs/man400px.png"  -->  
+            <div class="profile text-center">           
                 <asp:Image ID="imgUserProfile" runat="server"  CssClass="img-fluid" AlternateText="User Image" />                     
                 <asp:Label ID="lblUserName" runat="server" Text="User Name" CssClass="h4" />
             </div>
@@ -321,59 +323,46 @@
 
           <!-- Main Content -->
         <div id="Tasks" class="container">
+
             <!-- Task Management Section -->
             <div class="header-container">
                 <h1 class="title">Task Management</h1>
-                <%--<asp:Button runat="server" ID="btnAddTask" Text="Add Task" CssClass="btnaddtask" OnCommand="AddTask_Command" data-bs-toggle="modal" data-bs-target="#addTaskModal" />--%>
-                <button type="button" class="btn-add-task " data-bs-toggle="modal" data-bs-target="#addTaskModal" >Add Task</button>
+                <button type="button" class="btn-add-task " data-bs-toggle="modal" data-bs-target="#addTaskModal" onclick="clearModal()" >Add Task</button>
             </div>
-
-            <div  class="table-wrapper">
+            <div class="table-wrapper">                
                 <asp:GridView ID="gvTasks" runat="server" AutoGenerateColumns="False" CssClass="custom-table" OnRowCommand="gvTasks_RowCommand">
                     <Columns>
                         <asp:TemplateField HeaderText="Select">
                             <ItemTemplate>
-                                <asp:Button ID="btnSelect" runat="server" 
-                                            Text='<%# bool.Parse(Eval("IsActive").ToString()) ? "✔" : "❌" %>' 
-                                            CommandName="MarkComplete" 
-                                            CommandArgument='<%# Eval("TaskID") %>' 
-                                            CssClass='<%# bool.Parse(Eval("IsActive").ToString()) ? "btn-edit-green" : "btn-edit-red" %>' />
+                                <asp:Button ID="btnSelect" runat="server" Text='<%# bool.Parse(Eval("IsActive").ToString()) ? "✔" : "❌" %>' CommandName="MarkComplete" CommandArgument='<%# Eval("TaskID") %>' CssClass='<%# bool.Parse(Eval("IsActive").ToString()) ? "btn-edit-green" : "btn-edit-red" %>' />
                             </ItemTemplate>
-
-                        </asp:TemplateField>
-
-       
+                        </asp:TemplateField>       
                         <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
-
-                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-
-      
-                        <asp:BoundField DataField="CategoryName" HeaderText="Category" SortExpression="CategoryName" />
-
-      
-                        <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" />
-
-      
-                        <asp:BoundField DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" />
-
-       
+                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />      
+                        <asp:BoundField DataField="CategoryName" HeaderText="Category" SortExpression="CategoryName" />      
+                        <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" />      
+                        <asp:BoundField DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" />       
                         <asp:TemplateField HeaderText="Completed">
                             <ItemTemplate>
-                                <asp:CheckBox ID="chkCompleted" runat="server" Checked='<%# Eval("IsActive") %>' Enabled="False" />
+                                <asp:CheckBox ID="chkCompleted" runat="server" Checked='<%# Eval("IsActive") %>' Enabled="true" />
                             </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Actions">
                             <ItemTemplate>
-                                <asp:Button ID="btnEdit" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("TaskID") %>' Text="Edit" CssClass="btn-edit" />
+                                <button type="button" class="btn-edit" data-bs-toggle="modal" data-bs-target="#addTaskModal" onclick="fillModal('<%# Eval("TaskID") %>', '<%# Eval("Title") %>', '<%# Eval("Description") %>', '<%# Eval("CategoryName") %>', '<%# Eval("StartDate") %>', '<%# Eval("EndDate") %>', '<%# Eval("IsActive") %>')">Edit</button>
                                 <asp:Button ID="btnDelete" runat="server" CommandName="DeleteTask" CommandArgument='<%# Eval("TaskID") %>' Text="Delete" CssClass="btn-delete" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-
+                    
             </div>
+
         </div>
+
+
+
 
         <!-- Modal Add Task -->
 
@@ -381,7 +370,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                <asp:Label ID="lModalTitle" runat="server" Text="Add New Task " CssClass="modal-title"/>              
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -390,9 +379,8 @@
                 <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control mt-2" placeholder="Description"></asp:TextBox>
                 <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control mt-2">
                     
-                   <asp:ListItem Text="Select Category" Value="" />
-                    <%-- <asp:ListItem Text="Category 1" Value="1" />
-                    <asp:ListItem Text="Category 2" Value="2" />--%>
+                   <asp:ListItem Text="Select Category" Value="0" />
+                   
                 </asp:DropDownList>
                 <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control mt-2" placeholder="Start Date" TextMode="Date"></asp:TextBox>
                 <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control mt-2" placeholder="End Date" TextMode="Date"></asp:TextBox>
@@ -405,6 +393,9 @@
         </div>
     </div>
 </div>
+
+        
+
 
 
         <!--  achievements -->
@@ -438,48 +429,77 @@
 
     </form>
     <script>
-        // Event Listeners for Edit and Delete Buttons
-        document.addEventListener("DOMContentLoaded", () => {
-            const editButtons = document.querySelectorAll(".btn-edit");
-            const deleteButtons = document.querySelectorAll(".btn-delete");
 
-            editButtons.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    event.preventDefault();
-                    openAddTaskModal();//alert("Edit functionality is not implemented yet!");
-                });
-            });
-
-            deleteButtons.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    const row = btn.closest("tr");
-                    row.remove(); // Remove the row
-                });
-            });
-        });
-
-        
+      
         function closeModal() {
                 $('#addTaskModal').modal('hide');
         }
-        function openAddTaskModal() {
-            $('#addTaskModal').modal('show');
-            event.stopPropagation();  // إيقاف الأحداث الأخرى من التأثير
+
+
+
+        function fillModal(taskId, title, description, category, startDate, endDate, isActive) {
+
+            function formatDate(dateString) {
+               
+                var parts = dateString.split(' ')[0].split('/'); 
+                return '20' + parts[2] + '-' + parts[1] + '-' + parts[0]; 
+            }
+
+
+            document.getElementById('<%= lModalTitle.ClientID %>').innerText = "Update Task";
+            document.getElementById('<%= txtTitle.ClientID %>').value = title;
+            document.getElementById('<%= txtDescription.ClientID %>').value = description;
+
+            var categoryDropdown = document.getElementById('<%= ddlCategory.ClientID %>');
+            var options = categoryDropdown.options;
+            
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].text === category) {
+                    categoryDropdown.selectedIndex = i; 
+                    break; 
+                }
+            }
+
+            
+            document.getElementById('<%= txtStartDate.ClientID %>').value = formatDate(startDate);
+            document.getElementById('<%= txtEndDate.ClientID %>').value = formatDate(endDate);
+            document.getElementById('<%= chkIsActive.ClientID %>').checked = (isActive === "true");  
         }
 
-        //function openAddTaskModal() {
-        //    $('#addTaskModal').modal('show');
-        //}
+        function clearModal() {
+           
+            document.getElementById('<%= lModalTitle.ClientID %>').innerText = "Add New Task";            
+            document.getElementById('txtTitle').value = "";
+            document.getElementById('txtDescription').value = "";
+            document.getElementById('ddlCategory').value = 1; 
+            document.getElementById('txtStartDate').value = "";
+            document.getElementById('txtEndDate').value = "";
+          
+        }
 
+        function updateTask() {
+            // هنا يمكنك تنفيذ الكود لتحديث المهمة في الخلفية باستخدام AJAX أو إرسال البيانات إلى الخادم
+            // يمكنك الحصول على القيم من الحقول بعد ملء النموذج
+            let title = document.getElementById('utxtTitle').value;
+            let description = document.getElementById('utxtDescription').value;
+            let category = document.getElementById('uddlCategory').value;
+            let startDate = document.getElementById('utxtStartDate').value;
+            let endDate = document.getElementById('utxtEndDate').value;
+            let isActive = document.getElementById('uchkIsActive').checked;
 
-        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
-            $('#addTaskModal').modal('show');
-        });
+            // مثال لإرسال البيانات باستخدام AJAX (يمكنك تخصيصه حسب الحاجة)
+            console.log('Task Updated: ', title, description, category, startDate, endDate, isActive);
+
+            // هنا يمكن تنفيذ عملية التحديث الفعلي (مثال: AJAX أو إرسال البيانات إلى خادم)
+        }
+
 
 
     </script>
+
+
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="bootstrap/jquery-3.6.0.min.js"></script>
-    <%--<script src="materialize/materialize.min.js"></script>--%>
+    
 </body>
 </html>

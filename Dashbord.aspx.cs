@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static TasksManegar.LoginPage;
@@ -15,15 +16,17 @@ namespace TasksManegar
          enMode _Mode;
 
         clsTasks TheTask;
-        int TheTaskID;
+        //int TheTaskID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-
                 Config();
             }
+
+
+
         }
 
 
@@ -33,11 +36,6 @@ namespace TasksManegar
             BindAchievements();
             LoadSideBarInfo();
             LoadCategories();
-
-
-
-
-
 
         }
 
@@ -109,7 +107,6 @@ namespace TasksManegar
 
                 if (_Task.Save())
                 {
-
                     ClientScript.RegisterStartupScript(this.GetType(), "Error",
                         "alert('Suceessfully')");
                 }
@@ -120,37 +117,68 @@ namespace TasksManegar
             }
             if (e.CommandName == "EditTask")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openAddTaskModal();", true);
-
-                TheTaskID = (int)e.CommandArgument;
+                EditTask(Convert.ToInt32(e.CommandArgument));
+                string script = "$('#uupdateTaskModal').modal('show')";
+                ClientScript.RegisterStartupScript(this.GetType(), "modal", script, true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openUpdateTaskModal();", true);
             }
 
             if (e.CommandName == "DeleteTask")
-            {
-                int taskId =(int)e.CommandArgument;
-                clsTasks.DeleteTask(taskId);
+            {                
+                //clsTasks.DeleteTask(Convert.ToInt32(e.CommandArgument));
             }
-
-
 
             // إعادة تحميل المهام
             LoadTasks();
         }
 
-        private void EditTask()
+        [WebMethod]
+        public static clsTasks GetTaskDetails(int id)
         {
-            _Mode = enMode.UpdateTask;
-            TheTask = clsTasks.Find(TheTaskID);
+            // استرجاع تفاصيل المهمة من طبقة الأعمال
+            clsTasks task = clsTasks.Find(id);
+            return task;
+        }
 
-           txtTitle.Text = TheTask.Title;
-           txtDescription.Text = TheTask.Description;
-           ddlCategory.SelectedIndex = TheTask.CategoryID;
-           txtStartDate.Text = TheTask.StartDate.ToString("dd/MM/yyyy");
-           txtEndDate.Text = TheTask.EndDate.ToString("dd/MM/yyyy");
-           chkIsActive.Checked = TheTask.IsActive;
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            // الحصول على TaskID من CommandArgument
+            Button btnEdit = sender as Button;
+            int taskID = Convert.ToInt32(btnEdit.CommandArgument);
 
+            EditTask(Convert.ToInt32(taskID));
+            
 
+            ClientScript.RegisterStartupScript( this.GetType(), "openModal", "openUpdateTaskModal();", true);
 
+        }
+
+            private void EditTask(int TaskID)
+        {
+            
+            TheTask = clsTasks.Find(TaskID);
+            if (TheTask != null)
+            {
+                lModalTitle.Text = "Update Task";
+                txtTitle.Text = TheTask.Title;
+                txtDescription.Text = TheTask.Description;
+                ddlCategory.SelectedIndex = TheTask.CategoryID;
+                txtStartDate.Text = TheTask.StartDate.ToString("dd/MM/yyyy");
+                txtEndDate.Text = TheTask.EndDate.ToString("dd/MM/yyyy");
+                chkIsActive.Checked = TheTask.IsActive;
+            }
+            else
+            {
+                // رسالة خطأ إذا كانت البيانات غير موجودة
+                lModalTitle.Text = "Error";
+                txtTitle.Text = "";
+                txtDescription.Text = "";
+                ddlCategory.SelectedIndex = -1;
+                txtStartDate.Text = "";
+                txtEndDate.Text = "";
+                chkIsActive.Checked = false;
+            }
+           
         }
         private void BindAchievements()
         {
@@ -261,14 +289,11 @@ namespace TasksManegar
 
         protected void AddTask_Command(object sender, CommandEventArgs e)
         {
-            // هنا يمكنك كتابة الكود الذي ترغب في تنفيذه عند الضغط على الزر
-            // مثال: فتح المودال أو تنفيذ أي عملية أخرى
-            Response.Write("Add Task button clicked");
+            lModalTitle.Text = "Add New new Task";
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
 
             clsTasks _Task = new clsTasks();
 
@@ -282,7 +307,6 @@ namespace TasksManegar
 
             if(_Task.Save())
             {
-
                 ClientScript.RegisterStartupScript(this.GetType(), "Error",
                     "alert('Suceessfully')");
             }
@@ -291,9 +315,7 @@ namespace TasksManegar
                     "alert('Failed')");
 
             // إعادة تحميل البيانات في 
-            LoadTasks();
-
-            
+            LoadTasks();            
         }
 
 
