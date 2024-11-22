@@ -12,11 +12,13 @@ namespace TasksManegar
 {
     public partial class Dashbord : System.Web.UI.Page
     {
+        
         private enum enMode { AddTask=0, UpdateTask=1};
          enMode _Mode;
 
-        clsTasks TheTask;
-        //int TheTaskID;
+       static clsTasks Tasks;
+       static clsAchievement Achievement;
+       int TaskID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +38,7 @@ namespace TasksManegar
             BindAchievements();
             LoadSideBarInfo();
             LoadCategories();
+            BindAchievements();
 
         }
 
@@ -74,18 +77,6 @@ namespace TasksManegar
 
         private void LoadTasks()
         {
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("Id");
-            //dt.Columns.Add("Title");
-            //dt.Columns.Add("Description");
-            //dt.Columns.Add("Category");
-            //dt.Columns.Add("StartDate");
-            //dt.Columns.Add("EndDate");
-            //dt.Columns.Add("IsCompleted", typeof(bool));
-
-            //// بيانات وهمي
-            //dt.Rows.Add(1, "Task 1", "Description 1", "Category 1", DateTime.Now.AddDays(-1), DateTime.Now, true);
-            //dt.Rows.Add(2, "Task 2", "Description 2", "Category 2", DateTime.Now.AddDays(-2), DateTime.Now, false);
 
             gvTasks.DataSource = clsTasks.GetAllTasks(Globle._GUser.UserID);
             
@@ -115,17 +106,10 @@ namespace TasksManegar
                         "alert('Failed')");
 
             }
-            if (e.CommandName == "EditTask")
-            {
-                EditTask(Convert.ToInt32(e.CommandArgument));
-                string script = "$('#uupdateTaskModal').modal('show')";
-                ClientScript.RegisterStartupScript(this.GetType(), "modal", script, true);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openUpdateTaskModal();", true);
-            }
 
             if (e.CommandName == "DeleteTask")
             {                
-                //clsTasks.DeleteTask(Convert.ToInt32(e.CommandArgument));
+                clsTasks.DeleteTask(Convert.ToInt32(e.CommandArgument));
             }
 
             // إعادة تحميل المهام
@@ -133,179 +117,46 @@ namespace TasksManegar
         }
 
         [WebMethod]
-        public static clsTasks GetTaskDetails(int id)
+        public static int TaskServerHandler(int TaskID)
         {
-            // استرجاع تفاصيل المهمة من طبقة الأعمال
-            clsTasks task = clsTasks.Find(id);
-            return task;
-        }
-
-        protected void btnEdit_Click(object sender, EventArgs e)
-        {
-            // الحصول على TaskID من CommandArgument
-            Button btnEdit = sender as Button;
-            int taskID = Convert.ToInt32(btnEdit.CommandArgument);
-
-            EditTask(Convert.ToInt32(taskID));
-            
-
-            ClientScript.RegisterStartupScript( this.GetType(), "openModal", "openUpdateTaskModal();", true);
-
-        }
-
-            private void EditTask(int TaskID)
-        {
-            
-            TheTask = clsTasks.Find(TaskID);
-            if (TheTask != null)
+            if (TaskID == -1)
             {
-                lModalTitle.Text = "Update Task";
-                txtTitle.Text = TheTask.Title;
-                txtDescription.Text = TheTask.Description;
-                ddlCategory.SelectedIndex = TheTask.CategoryID;
-                txtStartDate.Text = TheTask.StartDate.ToString("dd/MM/yyyy");
-                txtEndDate.Text = TheTask.EndDate.ToString("dd/MM/yyyy");
-                chkIsActive.Checked = TheTask.IsActive;
+                Tasks = new clsTasks(); 
             }
             else
+                Tasks = clsTasks.Find(TaskID);
+
+
+            return TaskID;
+        }
+
+        [WebMethod]
+        public static int AhcievmentServerHandler(int AchievmentID)
+        {
+            if (AchievmentID == -1)
             {
-                // رسالة خطأ إذا كانت البيانات غير موجودة
-                lModalTitle.Text = "Error";
-                txtTitle.Text = "";
-                txtDescription.Text = "";
-                ddlCategory.SelectedIndex = -1;
-                txtStartDate.Text = "";
-                txtEndDate.Text = "";
-                chkIsActive.Checked = false;
+                Achievement = new clsAchievement();
             }
-           
-        }
-        private void BindAchievements()
-        {
-            DataTable dtAchievements = new DataTable();
-            dtAchievements.Columns.Add("NoteId", typeof(int));
-            dtAchievements.Columns.Add("Achievement", typeof(string));
-
-            // بيانات وهمية، استبدلها ببيانات من قاعدة البيانات
-            dtAchievements.Rows.Add(1, "Completed first module");
-            dtAchievements.Rows.Add(2, "Created a new feature");
-
-            gvAchievements.DataSource = dtAchievements;
-            gvAchievements.DataBind();
-        }
-
-        protected void btnAddAchievement_Click(object sender, EventArgs e)
-        {
-            string achievement = txtAchievement.Text.Trim();
-            if (!string.IsNullOrEmpty(achievement))
-            {
-                // إضافة الإنجاز لقاعدة البيانات
-                string query = "INSERT INTO Achievements (Achievement) VALUES (@Achievement)";
-                using (SqlConnection conn = new SqlConnection("your_connection_string"))
-                {
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Achievement", achievement);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                txtAchievement.Text = string.Empty;
-                BindAchievements();
-            }
-        }
-
-        protected void btnUpdateAchievement_Click(object sender, EventArgs e)
-        {
-            int noteId = int.Parse(hfNoteId.Value);
-            string updatedAchievement = txtAchievement.Text.Trim();
-
-            if (!string.IsNullOrEmpty(updatedAchievement))
-            {
-                // تحديث الإنجاز في قاعدة البيانات
-                string query = "UPDATE Achievements SET Achievement = @Achievement WHERE NoteId = @NoteId";
-                using (SqlConnection conn = new SqlConnection("your_connection_string"))
-                {
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Achievement", updatedAchievement);
-                        cmd.Parameters.AddWithValue("@NoteId", noteId);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                txtAchievement.Text = string.Empty;
-                hfNoteId.Value = string.Empty;
-                btnAddAchievement.Visible = true;
-                btnUpdateAchievement.Visible = false;
-                btnCancelEdit.Visible = false;
-                BindAchievements();
-            }
-        }
-
-        protected void btnCancelEdit_Click(object sender, EventArgs e)
-        {
-            txtAchievement.Text = string.Empty;
-            hfNoteId.Value = string.Empty;
-            btnAddAchievement.Visible = true;
-            btnUpdateAchievement.Visible = false;
-            btnCancelEdit.Visible = false;
-        }
-
-        protected void gvAchievements_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            int noteId = Convert.ToInt32(e.CommandArgument);
-
-            if (e.CommandName == "EditAchievement")
-            {
-                // استرجاع البيانات من قاعدة البيانات
-                hfNoteId.Value = noteId.ToString();
-                txtAchievement.Text = "Existing achievement text"; // استبدلها ببيانات من قاعدة البيانات
-                btnAddAchievement.Visible = false;
-                btnUpdateAchievement.Visible = true;
-                btnCancelEdit.Visible = true;
-            }
-            else if (e.CommandName == "DeleteAchievement")
-            {
-                // حذف الإنجاز من قاعدة البيانات
-                string query = "DELETE FROM Achievements WHERE NoteId = @NoteId";
-                using (SqlConnection conn = new SqlConnection("your_connection_string"))
-                {
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@NoteId", noteId);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                BindAchievements();
-            }
-
-        }
+            else
+                Achievement = clsAchievement.Find(AchievmentID);
 
 
-        protected void AddTask_Command(object sender, CommandEventArgs e)
-        {
-            lModalTitle.Text = "Add New new Task";
+            return AchievmentID;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            clsTasks _Task = new clsTasks();
+            Tasks.Title = txtTitle.Text;
+            Tasks.Description = txtDescription.Text;
+            Tasks.CategoryID = int.Parse(ddlCategory.SelectedValue);
+            Tasks.StartDate = DateTime.Parse(txtStartDate.Text);
+            Tasks.EndDate = DateTime.Parse(txtEndDate.Text);
+            Tasks.IsActive = chkIsActive.Checked;
+            Tasks.UserID = Globle._GUser.UserID;
+                        
 
-            _Task.Title = txtTitle.Text;
-            _Task.Description = txtDescription.Text;
-            _Task.CategoryID = int.Parse(ddlCategory.SelectedValue);
-            _Task.StartDate = DateTime.Parse(txtStartDate.Text);
-            _Task.EndDate = DateTime.Parse(txtEndDate.Text);
-            _Task.IsActive = chkIsActive.Checked;
-            _Task.UserID = Globle._GUser.UserID;
-
-            if(_Task.Save())
+            if (Tasks.Save())
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "Error",
                     "alert('Suceessfully')");
@@ -315,9 +166,116 @@ namespace TasksManegar
                     "alert('Failed')");
 
             // إعادة تحميل البيانات في 
-            LoadTasks();            
+            LoadTasks();
         }
 
+
+        private void BindAchievements()
+        {
+
+            gvAchievements.DataSource = clsAchievement.GetAllAchievement(Globle._GUser.UserID);
+            gvAchievements.DataBind();
+        }
+
+        protected void btnAddAchievement_Click(object sender, EventArgs e)
+        {
+            //string achievement = txtAchievement.Text.Trim();
+            //if (!string.IsNullOrEmpty(achievement))
+            //{
+            //    // إضافة الإنجاز لقاعدة البيانات
+            //    string query = "INSERT INTO Achievements (Achievement) VALUES (@Achievement)";
+            //    using (SqlConnection conn = new SqlConnection("your_connection_string"))
+            //    {
+            //        using (SqlCommand cmd = new SqlCommand(query, conn))
+            //        {
+            //            cmd.Parameters.AddWithValue("@Achievement", achievement);
+            //            conn.Open();
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //    }
+
+            //    txtAchievement.Text = string.Empty;
+            //    BindAchievements();
+            //}
+        }
+
+        protected void btnUpdateAchievement_Click(object sender, EventArgs e)
+        {
+            //int noteId = int.Parse(hfNoteId.Value);
+            //string updatedAchievement = txtAchievement.Text.Trim();
+
+            //if (!string.IsNullOrEmpty(updatedAchievement))
+            //{
+            //    // تحديث الإنجاز في قاعدة البيانات
+            //    string query = "UPDATE Achievements SET Achievement = @Achievement WHERE NoteId = @NoteId";
+            //    using (SqlConnection conn = new SqlConnection("your_connection_string"))
+            //    {
+            //        using (SqlCommand cmd = new SqlCommand(query, conn))
+            //        {
+            //            cmd.Parameters.AddWithValue("@Achievement", updatedAchievement);
+            //            cmd.Parameters.AddWithValue("@NoteId", noteId);
+            //            conn.Open();
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //    }
+
+            //    txtAchievement.Text = string.Empty;
+            //    hfNoteId.Value = string.Empty;
+            //    btnAddAchievement.Visible = true;
+            //    btnUpdateAchievement.Visible = false;
+            //    btnCancelEdit.Visible = false;
+            //    BindAchievements();
+            //}
+        }
+
+        protected void btnCancelEdit_Click(object sender, EventArgs e)
+        {
+            //txtAchievement.Text = string.Empty;
+            //hfNoteId.Value = string.Empty;
+            //btnAddAchievement.Visible = true;
+            //btnUpdateAchievement.Visible = false;
+            //btnCancelEdit.Visible = false;
+        }
+
+        protected void gvAchievements_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "DeleteAchievement")
+            {
+
+                clsAchievement.DeleteAchievement(Convert.ToInt32(e.CommandArgument));
+                
+            }
+            BindAchievements();
+        }
+
+
+        protected void AddTask_Command(object sender, CommandEventArgs e)
+        {
+            lModalTitle.Text = "Add New new Task";
+        }
+
+        protected void AbtnSave_Click(object sender, EventArgs e)
+        {
+            Achievement.AchievementName = txtAchievement.Text;
+            Achievement.AchievementDescription = txtAchievmentDescription.Text;
+            Achievement.AchievementDate = DateTime.Parse(txtAchievementDate.Text);
+            Achievement.UserID =Globle._GUser.UserID;
+            
+           
+
+            if (Achievement.Save())
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Error",
+                    "alert('Suceessfully')");
+            }
+            else
+                ClientScript.RegisterStartupScript(this.GetType(), "Error",
+                    "alert('Failed')");
+
+            // تحميل الانجازات 
+            BindAchievements();
+        }
 
     }
 }

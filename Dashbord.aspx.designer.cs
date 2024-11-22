@@ -24,6 +24,15 @@ namespace TasksManegar
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
         /// imgUserProfile control.
         /// </summary>
         /// <remarks>
@@ -132,6 +141,15 @@ namespace TasksManegar
         protected global::System.Web.UI.WebControls.GridView gvAchievements;
 
         /// <summary>
+        /// lTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lTitle;
+
+        /// <summary>
         /// txtAchievement control.
         /// </summary>
         /// <remarks>
@@ -141,39 +159,30 @@ namespace TasksManegar
         protected global::System.Web.UI.WebControls.TextBox txtAchievement;
 
         /// <summary>
-        /// hfNoteId control.
+        /// txtAchievementDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfNoteId;
+        protected global::System.Web.UI.WebControls.TextBox txtAchievementDate;
 
         /// <summary>
-        /// btnAddAchievement control.
+        /// txtAchievmentDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddAchievement;
+        protected global::System.Web.UI.WebControls.TextBox txtAchievmentDescription;
 
         /// <summary>
-        /// btnUpdateAchievement control.
+        /// AbtnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateAchievement;
-
-        /// <summary>
-        /// btnCancelEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelEdit;
+        protected global::System.Web.UI.WebControls.Button AbtnSave;
     }
 }

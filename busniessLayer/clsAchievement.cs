@@ -25,7 +25,7 @@ namespace busniessLayer
 
         public clsAchievement()
         {
-            AchievementID = 0;
+            AchievementID = -1;
             UserID = 0;
             AchievementName = "";
             AchievementDate = DateTime.Now;
@@ -44,6 +44,26 @@ namespace busniessLayer
             AchievementDescription = achievementDescription;
 
             _Mode = enMode.updateMode;
+        }
+
+        public static clsAchievement Find(int AchievementID)
+        {
+            //AchievementID,UserID, AchievementName, AchievementDate, AchievementDescription 
+            int  UserID = -1;
+            string AchievementName = "", AchievementDescription = "";
+            DateTime AchievementDate = DateTime.Now;
+
+
+
+            if(clsAchievementsDataAccess.FindByAchievmentID(AchievementID, ref UserID, ref AchievementName, ref AchievementDate,
+                ref AchievementDescription))
+            
+                return new clsAchievement(AchievementID, UserID, AchievementName, AchievementDate, AchievementDescription);
+
+            else
+                return null;
+            
+           
         }
 
         public static DataTable GetAllAchievement(int AchievementID)

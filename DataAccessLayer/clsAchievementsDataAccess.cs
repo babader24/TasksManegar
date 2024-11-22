@@ -50,8 +50,7 @@ namespace DataAccessLayer
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
             string query = @"insert into Achievements (UserID, AchievementName,AchievementDate,AchievementDescription)
-                values (UserID = @UserID, AchievementName = @AchievementName,AchievementDate = @AchievementDate,
-                AchievementDescription = @AchievementDescription);
+                values (@UserID, @AchievementName, @AchievementDate, @AchievementDescription);
                 Select Scope_identity();";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -89,7 +88,7 @@ namespace DataAccessLayer
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
             string query = @"Update Achievements 
-                set UserID = @UserID, AchievementName = @AchievementName,AchievementDate = @AchievementDate
+                set UserID = @UserID, AchievementName = @AchievementName,AchievementDate = @AchievementDate,
                 AchievementDescription = @AchievementDescription
                 Where AchievementID = @AchievementID ";
 
@@ -144,6 +143,50 @@ namespace DataAccessLayer
                 connection.Close();
             }
             return (rowEffected > 0);
+        }
+
+        public static bool FindByAchievmentID(int AchievementID,ref int UserID, ref string AchievementName, ref DateTime AchievementDate,
+            ref string AchievementDescription)
+            
+        {
+            bool IsFound;
+
+            SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
+            string query = "select * from Achievements WHere AchievementID = @AchievementID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@AchievementID", AchievementID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+
+                    AchievementName = (string)reader["AchievementName"];
+                    UserID = (int)reader["UserID"];
+                    AchievementDescription = (string)reader["AchievementDescription"];                  
+                    AchievementDate = (DateTime)reader["AchievementDate"];
+                    
+                }
+                else
+                    IsFound = false;
+                reader.Close();
+
+            }
+            catch
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return IsFound;
         }
 
     }

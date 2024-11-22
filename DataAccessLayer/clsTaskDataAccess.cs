@@ -30,7 +30,7 @@ namespace DataAccessLayer
 
                 SqlDataReader reader = command.ExecuteReader();
 
-                if(reader.HasRows)
+                if(reader.Read())
                 {
                     dt.Load(reader);
                 }
@@ -128,15 +128,15 @@ namespace DataAccessLayer
 
         }
 
-        public static bool DeleteTask(int UserID)
+        public static bool DeleteTask(int TaskID)
         {
             int rowEffected;
             SqlConnection connection = new SqlConnection(clsSettings.ConnetionString);
-            string query = "Delete From Task Where UserID = @UserID";
+            string query = "Delete From Task Where TaskID = @TaskID";
 
             SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@UserID", UserID);
+            command.Parameters.AddWithValue("@TaskID", TaskID);
 
             try
             {

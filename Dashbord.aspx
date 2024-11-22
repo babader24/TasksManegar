@@ -126,6 +126,17 @@
         transition: all 0.3s ease; 
     }
 
+        .btn-edit-star {
+       
+        color: white;
+        border: none;
+        
+        
+        font-size: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease; 
+    }
+
     .btn-edit-green:hover {
         background-color: #45a049; 
         border-color: #45a049; 
@@ -303,10 +314,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       
+       <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
        
                 <!-- Sidebar -->
-        <div class="sidebar">
+<div class="sidebar">
             <div class="profile text-center">           
                 <asp:Image ID="imgUserProfile" runat="server"  CssClass="img-fluid" AlternateText="User Image" />                     
                 <asp:Label ID="lblUserName" runat="server" Text="User Name" CssClass="h4" />
@@ -321,8 +333,8 @@
             </div>
         </div>
 
-          <!-- Main Content -->
-        <div id="Tasks" class="container">
+          <!-- Tasks -->
+<div id="Tasks" class="container">
 
             <!-- Task Management Section -->
             <div class="header-container">
@@ -362,8 +374,6 @@
         </div>
 
 
-
-
         <!-- Modal Add Task -->
 
 <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
@@ -399,30 +409,53 @@
 
 
         <!--  achievements -->
-        <div id="Achievements" class="container">
-    <h2 class="title">Achievements</h2>
+<div id="Achievements" class="container">
+    <h2 class="title">Achievements🎉</h2>
     <div  class="table-wrapper">
         <asp:GridView ID="gvAchievements" runat="server" AutoGenerateColumns="False" CssClass="custom-table" OnRowCommand="gvAchievements_RowCommand">
             <Columns>
-                <asp:BoundField DataField="NoteId" HeaderText="ID" SortExpression="NoteId" Visible="false" />
-                <asp:BoundField DataField="Achievement" HeaderText="Achievement" SortExpression="Achievement" />
+               <asp:TemplateField HeaderText="Star">
+                    <ItemTemplate>
+                         <asp:Button ID="btnStar" runat="server" Text="✨"  CssClass= "btn-edit-star"/>
+                    </ItemTemplate>
+                </asp:TemplateField>  
+                <asp:BoundField DataField="AchievementName" HeaderText="Achievement" SortExpression="AchievementName" />
+                <asp:BoundField DataField="AchievementDescription" HeaderText="Description" SortExpression="AchievementDescription" />
+                <asp:BoundField DataField="AchievementDate" HeaderText="Achievement Date" SortExpression="AchievementDate" />
                 <asp:TemplateField HeaderText="Actions">
                     <ItemTemplate>
-                        <asp:Button ID="btnEditAchievement" runat="server" CommandName="EditAchievement" CommandArgument='<%# Eval("NoteId") %>' Text="Edit" CssClass="btn-edit" />
-                        <asp:Button ID="btnDeleteAchievement" runat="server" CommandName="DeleteAchievement" CommandArgument='<%# Eval("NoteId") %>' Text="Delete" CssClass="btn-delete" />
+                        <button type="button" class="btn-edit" data-bs-toggle="modal" data-bs-target="#addAchievmentModal" onclick="fillAchievmentModal('<%# Eval("AchievementID") %>', '<%# Eval("AchievementName") %>', '<%# Eval("AchievementDescription") %>', '<%# Eval("AchievementDate") %>')" >Edit</button>
+                        <asp:Button ID="btnDeleteAchievement" runat="server" CommandName="DeleteAchievement" CommandArgument='<%# Eval("AchievementID") %>' Text="Delete" CssClass="btn-delete" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </div>
+     <button type="button" class="btn-add-task " data-bs-toggle="modal" data-bs-target="#addAchievmentModal" onclick="clearAchievmentmodal()" >Add Achievment</button>
+</div>
 
-    <!-- Form to add or update achievements -->
-    <div style="margin-top: 20px;">
-        <asp:TextBox ID="txtAchievement" runat="server" Placeholder="Enter your achievement here..." CssClass="form-control" Width="80%" />
-        <asp:HiddenField ID="hfNoteId" runat="server" />
-        <asp:Button ID="btnAddAchievement" runat="server" Text="Add Achievement" CssClass="btn-add-task" OnClick="btnAddAchievement_Click" />
-        <asp:Button ID="btnUpdateAchievement" runat="server" Text="Update Achievement" CssClass="btn-add-task" OnClick="btnUpdateAchievement_Click" Style="display:none;" />
-        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" CssClass="btn-add-task" OnClick="btnCancelEdit_Click" Style="display:none;" />
+        <!-- Modal Add Achievment -->
+
+<div class="modal fade" id="addAchievmentModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <asp:Label ID="lTitle" runat="server" Text="Add New Achievment " CssClass="modal-title"/>              
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                <asp:TextBox ID="txtAchievement" runat="server" CssClass="form-control" placeholder="Title"></asp:TextBox>
+                <asp:TextBox ID="txtAchievementDate" runat="server" CssClass="form-control mt-2" placeholder="Start Date" TextMode="Date"></asp:TextBox>
+                <asp:TextBox ID="txtAchievmentDescription" runat="server" CssClass="form-control mt-2" placeholder="Description"></asp:TextBox>
+
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <asp:Button ID="AbtnSave" runat="server" Text="Save" CssClass="btn btn-primary" OnClick="AbtnSave_Click" />
+            </div>
+        </div>
     </div>
 </div>
 
@@ -435,15 +468,15 @@
                 $('#addTaskModal').modal('hide');
         }
 
+        function formatDate(dateString) {
 
+            var parts = dateString.split(' ')[0].split('/');
+            return '20' + parts[2] + '-' + parts[1] + '-' + parts[0];
+        }
 
         function fillModal(taskId, title, description, category, startDate, endDate, isActive) {
 
-            function formatDate(dateString) {
-               
-                var parts = dateString.split(' ')[0].split('/'); 
-                return '20' + parts[2] + '-' + parts[1] + '-' + parts[0]; 
-            }
+
 
 
             document.getElementById('<%= lModalTitle.ClientID %>').innerText = "Update Task";
@@ -464,6 +497,8 @@
             document.getElementById('<%= txtStartDate.ClientID %>').value = formatDate(startDate);
             document.getElementById('<%= txtEndDate.ClientID %>').value = formatDate(endDate);
             document.getElementById('<%= chkIsActive.ClientID %>').checked = (isActive === "true");  
+
+            sendTaskIDToServer(taskId);
         }
 
         function clearModal() {
@@ -474,23 +509,56 @@
             document.getElementById('ddlCategory').value = 1; 
             document.getElementById('txtStartDate').value = "";
             document.getElementById('txtEndDate').value = "";
-          
+
+            sendTaskIDToServer(-1);
         }
 
-        function updateTask() {
-            // هنا يمكنك تنفيذ الكود لتحديث المهمة في الخلفية باستخدام AJAX أو إرسال البيانات إلى الخادم
-            // يمكنك الحصول على القيم من الحقول بعد ملء النموذج
-            let title = document.getElementById('utxtTitle').value;
-            let description = document.getElementById('utxtDescription').value;
-            let category = document.getElementById('uddlCategory').value;
-            let startDate = document.getElementById('utxtStartDate').value;
-            let endDate = document.getElementById('utxtEndDate').value;
-            let isActive = document.getElementById('uchkIsActive').checked;
+        function fillAchievmentModal(AchievementID, Achievement, Description, ADate) {
 
-            // مثال لإرسال البيانات باستخدام AJAX (يمكنك تخصيصه حسب الحاجة)
-            console.log('Task Updated: ', title, description, category, startDate, endDate, isActive);
+            document.getElementById('<%= lTitle.ClientID %>').innerText = "Update Achievment"; 
+            document.getElementById('<%= txtAchievement.ClientID %>').value = Achievement;
+            document.getElementById('<%= txtAchievementDate.ClientID %>').value = formatDate(ADate);          
+            document.getElementById('<%= txtAchievmentDescription.ClientID %>').value = Description
 
-            // هنا يمكن تنفيذ عملية التحديث الفعلي (مثال: AJAX أو إرسال البيانات إلى خادم)
+
+            sendAchievmentIDToServer(AchievementID);
+
+        }
+
+        function clearAchievmentmodal() {
+
+            document.getElementById('<%= lTitle.ClientID %>').innerText = "Add New Achievment"; 
+            document.getElementById('txtAchievement').value = "";
+            document.getElementById('txtAchievementDate').value = "";
+            document.getElementById('txtAchievmentDescription').value = "";
+
+            sendAchievmentIDToServer(-1);
+        }
+
+        function sendTaskIDToServer(taskId) {
+            fetch('/Dashbord.aspx/TaskServerHandler', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ TaskID: taskId })
+            })
+                .then(response => response.json())
+                .then(data => console.log('Success:', data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function sendAchievmentIDToServer(achievmentId) {
+            fetch('/Dashbord.aspx/AhcievmentServerHandler', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ AchievmentID: achievmentId })
+            })
+                .then(response => response.json())
+                .then(data => console.log('Success:', data))
+                .catch(error => console.error('Error:', error));
         }
 
 
