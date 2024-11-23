@@ -18,6 +18,7 @@ namespace TasksManegar
 
        static clsTasks Tasks;
        static clsAchievement Achievement;
+       static clsUsers _User;
        int TaskID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -275,6 +276,50 @@ namespace TasksManegar
 
             // تحميل الانجازات 
             BindAchievements();
+        }
+
+        [WebMethod]
+        public static clsUsers GetUserDetails()
+        {
+            _User = clsUsers.Find(Globle._GUser.UserID);
+
+            DateTime n = _User.DateOfBirth;
+           
+            return _User;
+        }
+
+
+        private void ReloadSideBarInfo()
+        {
+            imgUserProfile.ImageUrl = _User.ImagePath.Replace(Server.MapPath("~/"), "~/").Replace("\\", "/");                   
+            lblUserName.Text = _User.UserName;
+        }
+        protected void saveButton_Click(object sender, EventArgs e)
+        {
+            string selectedGender = Request.Form["gender"];
+
+            int d = _User.UserID;
+            _User.FirstName = firstName.Text;
+            _User.LastName = lastName.Text;
+            _User.Email = email.Text;
+            _User.DateOfBirth = DateTime.Parse(dob.Text);
+            _User.Gender = selectedGender == "Male" ? (byte)1 : (byte)0;
+            _User.ImagePath = @"F:\My_github_apps\TaskManegment\TheTasksManegar\imgs\" + photo.FileName;
+            photo.SaveAs(_User.ImagePath);
+            _User.UserName = username.Text;
+            _User.Password = password.Text;
+
+            if(_User.Save()) 
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Error",
+                    "alert('Suceessfully')");
+            }
+            else
+                ClientScript.RegisterStartupScript(this.GetType(), "Error",
+                    "alert('Failed')");
+
+            //تحميل البيانات الجديده
+            ReloadSideBarInfo();
         }
 
     }

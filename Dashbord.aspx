@@ -16,7 +16,7 @@
     
 
     
-    <style>
+<style>
     /* التعديلات الأساسية */
     body, html {
         margin: 0;
@@ -61,8 +61,15 @@
         margin: 5px 0;
         transition: background-color 0.3s ease;
     }
+    .sidebar .btnSetting {
+        text-transform: none;
+        background-color: #343a40;
+        border: none;
+        color: white;
+    }
 
-    .sidebar a:hover {
+    .sidebar a:hover ,
+    .sidebar a:hover~.btnSetting {
         background-color: #495057;
     }
 
@@ -75,7 +82,7 @@
     }
 
     .container {
-        margin-left: 270px; /* لتجنب تداخل المحتوى مع الـ sidebar */
+        margin-left: 270px; 
         padding: 20px;
         max-width: 1200px;
         margin-top: 20px;
@@ -326,12 +333,176 @@
             <nav>
                 <a href="#Tasks"><i class="fas fa-tasks"></i> Tasks</a>
                 <a href="#Achievements" class="mt-3"><i class="fas fa-trophy"></i> Achievements</a>
-                <a href="#" class="mt-3"><i class="fas fa-cogs"></i> Settings</a>
+                <a href="#" class="mt-3" data-bs-toggle="modal" data-bs-target="#userSettingsModal" onclick="fetchUserDetails()"><i class="fas fa-cogs"></i> Settings</a>
             </nav>
             <div class="logout">
                 <a href="loginPage.aspx"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>
+
+
+<!-- Modal -->
+<%--<div class="modal fade" id="userFormModal" tabindex="-1" aria-labelledby="userFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userFormModalLabel">User Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!-- First and Last Name -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter your first name">
+                        </div>
+                        <div class="col">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+                        </div>
+                    </div>
+
+                    <!-- Email and Date of Birth -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="col">
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob">
+                        </div>
+                    </div>
+
+                    <!-- Gender and Upload Photo -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label">Gender</label>
+                            <div>
+                                <input type="radio" class="btn-check" name="gender" id="male" value="Male">
+                                <label class="btn btn-outline-primary" for="male">Male</label>
+
+                                <input type="radio" class="btn-check" name="gender" id="female" value="Female">
+                                <label class="btn btn-outline-primary" for="female">Female</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="photo" class="form-label">Upload Photo</label>
+                            <input type="file" class="form-control" id="photo">
+                        </div>
+                    </div>
+
+                    <!-- Username, Password, and Confirm Password -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        </div>
+                        <div class="col">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>--%>
+
+
+
+        <!-- Settings Modal -->
+<div class="modal fade" id="userSettingsModal" tabindex="-1" aria-labelledby="userFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userFormModalLabel">User Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                    <!-- First and Last Name -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <asp:TextBox runat="server" ID="firstName" CssClass="form-control" placeholder="Enter your first name"></asp:TextBox>
+                        </div>
+                        <div class="col">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <asp:TextBox runat="server" ID="lastName" CssClass="form-control" placeholder="Enter your last name"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!-- Email and Date of Birth -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="email" class="form-label">Email</label>
+                            <asp:TextBox runat="server" ID="email" CssClass="form-control" placeholder="Enter your email" TextMode="Email"></asp:TextBox>
+                        </div>
+                        <div class="col">
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            <asp:TextBox runat="server" ID="dob" CssClass="form-control" placeholder="Enter a Date" TextMode="Date"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!-- Gender and Upload Photo -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label">Gender</label>
+                            <div>
+                                <input type="radio" class="btn-check" name="gender" id="male" value="Male">
+                                <label class="btn btn-outline-primary" for="male">Male</label>
+
+                                <input type="radio" class="btn-check" name="gender" id="female" value="Female">
+                                <label class="btn btn-outline-primary" for="female">Female</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="photo" class="form-label">Upload Photo</label>
+                            <asp:FileUpload runat="server" ID="photo" CssClass="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- Username, Password, and Confirm Password -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="username" class="form-label">Username</label>
+                            <asp:TextBox runat="server" ID="username" CssClass="form-control" placeholder="Enter username"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="password" class="form-label">Password</label>
+                            <asp:TextBox runat="server" ID="password" CssClass="form-control" placeholder="Enter password" TextMode="Password"></asp:TextBox>
+                        </div>
+                        <div class="col">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <asp:TextBox runat="server" ID="confirmPassword" CssClass="form-control" placeholder="Confirm password" TextMode="Password"></asp:TextBox>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <asp:Button ID="saveButton" runat="server" Text="Save" CssClass="btn btn-primary" OnClientClick="return validateSettingsForm();" OnClick="saveButton_Click" />                                                
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
           <!-- Tasks -->
 <div id="Tasks" class="container">
@@ -559,6 +730,88 @@
                 .then(response => response.json())
                 .then(data => console.log('Success:', data))
                 .catch(error => console.error('Error:', error));
+        }
+
+        function formatJsonDate(jsonDate) {
+        
+            var timestamp = parseInt(jsonDate.match(/\d+/)[0], 10);
+
+           
+            var date = new Date(timestamp);
+
+            
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1).padStart(2, '0'); 
+            var day = String(date.getDate()).padStart(2, '0');       
+
+            return year + '-' + month + '-' + day; 
+        }
+
+        function validateSettingsForm() {
+            // الحصول على القيم من الحقول
+            var firstName = document.getElementById('<%= firstName.ClientID %>').value.trim();
+        var lastName = document.getElementById('<%= lastName.ClientID %>').value.trim();
+        var email = document.getElementById('<%= email.ClientID %>').value.trim();
+        var dob = document.getElementById('<%= dob.ClientID %>').value.trim();
+        var username = document.getElementById('<%= username.ClientID %>').value.trim();
+        var password = document.getElementById('<%= password.ClientID %>').value.trim();
+        var confirmPassword = document.getElementById('<%= confirmPassword.ClientID %>').value.trim();
+        var photo = document.getElementById('<%= photo.ClientID %>').value.trim();
+
+        // التحقق من الحقل المختار للجنس
+        var genderMale = document.getElementById("male").checked;
+        var genderFemale = document.getElementById("female").checked;
+
+        // التحقق من الحقول الفارغة
+        if (firstName === "" || lastName === "" || email === "" || dob === "" || username === "" ||
+            password === "" || confirmPassword === ""|| (!genderMale && !genderFemale)) {
+            alert("يرجى ملء جميع الحقول المطلوبة.");
+            return false; // منع إرسال النموذج
+        }
+
+        // التحقق من صحة البريد الإلكتروني (صيغة بسيطة)
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("يرجى إدخال بريد إلكتروني صالح.");
+            return false;
+        }
+
+        // التحقق من تطابق كلمة المرور
+        if (password !== confirmPassword) {
+            alert("كلمة المرور وتأكيد كلمة المرور لا يتطابقان.");
+            return false;
+        }
+
+        return true; // السماح بإرسال النموذج إذا كانت جميع الشروط مستوفاة
+    }
+
+        async function fetchUserDetails() {
+            const response = await fetch('/Dashbord.aspx/GetUserDetails', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            });
+
+            const data = await response.json();
+            const user = data.d; 
+
+           
+            document.getElementById('firstName').value = user.FirstName;
+            document.getElementById('lastName').value = user.LastName;
+            document.getElementById('email').value = user.Email;
+            document.getElementById('dob').value = formatJsonDate(user.DateOfBirth)
+            document.getElementById('username').value = user.UserName;
+            
+
+           
+            if (user.Gender === 1) {
+                document.getElementById('male').checked = true;
+            } else {
+                document.getElementById('female').checked = true;
+            }
+
+            
+                   
         }
 
 

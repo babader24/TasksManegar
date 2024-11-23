@@ -162,7 +162,7 @@ namespace DataAccessLayer
             string query = @"Update Users 
                 set FirstName = @FirstName , LastName = @LastName, DateOfBirth = @DateOfBirth,Email = @Email,
                 Gender = @Gender,ImagePath = @ImagePath,Password = @Password,UserName = @UserName
-                where UserID = 1";
+                where UserID = @UserID";
 
             SqlCommand command = new SqlCommand(query, connection);
 

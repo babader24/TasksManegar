@@ -46,7 +46,7 @@ namespace TasksManegar
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-           // if (!validateLoginForm()) return; // Prevent further processing if form is invalid
+           
 
             if (chkRememberMe.Checked)
             {
@@ -82,20 +82,6 @@ namespace TasksManegar
                 writer.WriteLine(txtPassword.Text);
             }
         }
-
-        // Hash the password before storing or comparing
-        private string HashPassword(string password)
-        {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
-        }
+      
     }
 }
