@@ -28,16 +28,17 @@
 ## Installation
 
 1. Clone the repository:
+   
    ```bash
    git clone https://github.com/babader24/TheTasksManegar.git
 
-  TaskManegmentBackup
-2. Restore `TaskManegmentBackup` to SQL Server.  
-3. Go to the `DataAccess` layer and find the `cls_Settings` class.  
-4. Update the connection string with your own SQL Server settings credentials (e.g., ID, password).  
-5. In the `Create Account` page, specify your preferred directory for images and the `.txt` file used for storing user credentials.  
-6. On the `Dashboard`, set the directory path for uploading profile images to suit your preferences.  
-7. Build the solution to resolve dependencies.  
-8. Run the application.  
+
+3. Restore `TaskManegmentBackup` to SQL Server.  
+4. Go to the `DataAccess` layer and find the `cls_Settings` class.  
+5. Update the connection string with your own SQL Server settings credentials (e.g., ID, password).  
+6. In the `Create Account` page, specify your preferred directory for images and the `.txt` file used for storing user credentials.  
+7. On the `Dashboard`, set the directory path for uploading profile images to suit your preferences.  
+8. Build the solution to resolve dependencies.  
+9. Run the application.  
 
 
