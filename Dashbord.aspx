@@ -341,85 +341,7 @@
         </div>
 
 
-<!-- Modal -->
-<%--<div class="modal fade" id="userFormModal" tabindex="-1" aria-labelledby="userFormModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="userFormModalLabel">User Registration</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <!-- First and Last Name -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Enter your first name">
-                        </div>
-                        <div class="col">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
-                        </div>
-                    </div>
 
-                    <!-- Email and Date of Birth -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                        </div>
-                        <div class="col">
-                            <label for="dob" class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob">
-                        </div>
-                    </div>
-
-                    <!-- Gender and Upload Photo -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="form-label">Gender</label>
-                            <div>
-                                <input type="radio" class="btn-check" name="gender" id="male" value="Male">
-                                <label class="btn btn-outline-primary" for="male">Male</label>
-
-                                <input type="radio" class="btn-check" name="gender" id="female" value="Female">
-                                <label class="btn btn-outline-primary" for="female">Female</label>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="photo" class="form-label">Upload Photo</label>
-                            <input type="file" class="form-control" id="photo">
-                        </div>
-                    </div>
-
-                    <!-- Username, Password, and Confirm Password -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter username">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter password">
-                        </div>
-                        <div class="col">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>--%>
 
 
 
@@ -748,42 +670,52 @@
         }
 
         function validateSettingsForm() {
-            // الحصول على القيم من الحقول
+           
             var firstName = document.getElementById('<%= firstName.ClientID %>').value.trim();
-        var lastName = document.getElementById('<%= lastName.ClientID %>').value.trim();
-        var email = document.getElementById('<%= email.ClientID %>').value.trim();
-        var dob = document.getElementById('<%= dob.ClientID %>').value.trim();
-        var username = document.getElementById('<%= username.ClientID %>').value.trim();
-        var password = document.getElementById('<%= password.ClientID %>').value.trim();
-        var confirmPassword = document.getElementById('<%= confirmPassword.ClientID %>').value.trim();
-        var photo = document.getElementById('<%= photo.ClientID %>').value.trim();
+            var lastName = document.getElementById('<%= lastName.ClientID %>').value.trim();
+            var email = document.getElementById('<%= email.ClientID %>').value.trim();
+            var dob = document.getElementById('<%= dob.ClientID %>').value.trim();
+            var username = document.getElementById('<%= username.ClientID %>').value.trim();
+            var password = document.getElementById('<%= password.ClientID %>').value.trim();
+            var confirmPassword = document.getElementById('<%= confirmPassword.ClientID %>').value.trim();
+            var photo = document.getElementById('<%= photo.ClientID %>').value.trim();
 
-        // التحقق من الحقل المختار للجنس
-        var genderMale = document.getElementById("male").checked;
-        var genderFemale = document.getElementById("female").checked;
+          
+            var genderMale = document.getElementById("male").checked;
+            var genderFemale = document.getElementById("female").checked;
 
-        // التحقق من الحقول الفارغة
-        if (firstName === "" || lastName === "" || email === "" || dob === "" || username === "" ||
-            password === "" || confirmPassword === ""|| (!genderMale && !genderFemale)) {
-            alert("يرجى ملء جميع الحقول المطلوبة.");
-            return false; // منع إرسال النموذج
+         
+            if (firstName === "" || lastName === "" || email === "" || dob === "" || username === "" ||
+                password === "" || confirmPassword === "" || (!genderMale && !genderFemale)) {
+                alert("يرجى ملء جميع الحقول المطلوبة.");
+                return false; // منع إرسال النموذج
+            }
+
+          
+            var noLeadingSpacesRegex = /^[^\s]/;
+            if (!noLeadingSpacesRegex.test(firstName) || !noLeadingSpacesRegex.test(lastName) ||
+                !noLeadingSpacesRegex.test(username) || !noLeadingSpacesRegex.test(password) ||
+                !noLeadingSpacesRegex.test(confirmPassword)) {
+                alert("لا يمكن أن تحتوي الحقول على مسافات في البداية.");
+                return false;
+            }
+
+           
+            var emailRegex = /^[^\s@]+@gmail\.com$/;
+            if (!emailRegex.test(email)) {
+                alert("يرجى إدخال بريد إلكتروني ينتهي بـ @gmail.com.");
+                return false;
+            }
+
+           
+            if (password !== confirmPassword) {
+                alert("كلمة المرور وتأكيد كلمة المرور لا يتطابقان.");
+                return false;
+            }
+
+            return true; 
         }
 
-        // التحقق من صحة البريد الإلكتروني (صيغة بسيطة)
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert("يرجى إدخال بريد إلكتروني صالح.");
-            return false;
-        }
-
-        // التحقق من تطابق كلمة المرور
-        if (password !== confirmPassword) {
-            alert("كلمة المرور وتأكيد كلمة المرور لا يتطابقان.");
-            return false;
-        }
-
-        return true; // السماح بإرسال النموذج إذا كانت جميع الشروط مستوفاة
-    }
 
         async function fetchUserDetails() {
             const response = await fetch('/Dashbord.aspx/GetUserDetails', {

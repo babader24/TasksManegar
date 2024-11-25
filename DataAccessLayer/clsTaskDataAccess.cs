@@ -30,7 +30,7 @@ namespace DataAccessLayer
 
                 SqlDataReader reader = command.ExecuteReader();
 
-                if(reader.Read())
+                if(reader.HasRows)
                 {
                     dt.Load(reader);
                 }

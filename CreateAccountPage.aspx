@@ -141,30 +141,44 @@
 
 
     <script type="text/javascript">
-    function validateRegisterForm() {
-        var firstName = document.getElementById('<%= txtFirstName.ClientID %>').value;
-        var lastName = document.getElementById('<%= txtLastName.ClientID %>').value;
-        var username = document.getElementById('<%= txtUsername.ClientID %>').value;
-        var birthday = document.getElementById('<%= txtBirthDate.ClientID %>').value;
-        var gender = document.getElementById('<%= ddlGender.ClientID %>').value;
-        var email = document.getElementById('<%= txtEmail.ClientID %>').value;
-        var photo = document.getElementById('<%= filePhoto.ClientID %>').value;
-        var password = document.getElementById('<%= txtPassword.ClientID %>').value;
-        var confirmPassword = document.getElementById('<%= txtConfirmPassword.ClientID %>').value;
+        function validateRegisterForm() {
 
+        var firstName = document.getElementById('<%= txtFirstName.ClientID %>').value.trim();
+        var lastName = document.getElementById('<%= txtLastName.ClientID %>').value.trim();
+        var username = document.getElementById('<%= txtUsername.ClientID %>').value.trim();
+        var birthday = document.getElementById('<%= txtBirthDate.ClientID %>').value.trim();
+        var gender = document.getElementById('<%= ddlGender.ClientID %>').value.trim();
+        var email = document.getElementById('<%= txtEmail.ClientID %>').value.trim();
+        var photo = document.getElementById('<%= filePhoto.ClientID %>').value.trim();
+        var password = document.getElementById('<%= txtPassword.ClientID %>').value.trim();
+        var confirmPassword = document.getElementById('<%= txtConfirmPassword.ClientID %>').value.trim();
+
+      
         if (firstName == "" || lastName == "" || username == "" || birthday == "" || gender == ""
-            || email == "" || photo == "" || password == "" || confirmPassword == "" ) {
+            || email == "" || photo == "" || password == "" || confirmPassword == "") {
             alert("يرجى ملء جميع الحقول المطلوبة.");
-            return false; // منع إرسال النموذج إذا كانت الحقول فارغة
+            return false;
         }
 
-        // التحقق من تطابق كلمة المرور
+      
+        if (/^\s/.test(firstName) || /^\s/.test(lastName) || /^\s/.test(username) || /^\s/.test(email)) {
+            alert("الحقول لا يجب أن تحتوي على مسافات في البداية.");
+            return false;
+        }
+
+        
         if (password !== confirmPassword) {
             alert("كلمة المرور وتأكيد كلمة المرور لا يتطابقان.");
             return false;
         }
 
-        return true; // السماح بإرسال النموذج إذا كانت جميع الحقول مكتملة
+     
+        if (!email.endsWith("@gmail.com")) {
+            alert("البريد الإلكتروني يجب أن ينتهي بـ @gmail.com.");
+            return false;
+        }
+
+        return true; // السماح بإرسال النموذج إذا كانت جميع الحقول مكتملة وصحيحة
     }
 
 
