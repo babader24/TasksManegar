@@ -40,5 +40,8 @@
 7. On the `Dashboard`, set the directory path for uploading profile images to suit your preferences.  
 8. Build the solution to resolve dependencies.  
 9. Run the application.  
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 10b5a2e929617f706bf4f1df96ac0047c7e1c49a
